@@ -22,6 +22,7 @@ class Maiz{
 		return 150
 	}
 }
+
 class Trigo{
 	var evoluciones=["wheat_0.png","wheat_1.png","wheat_2.png","wheat_3.png"]
 	var property image="wheat_0.png"
@@ -73,7 +74,7 @@ object hector {
 	}
 	
 	method guardarPlantaParaVender(planta){
-		plantasParaVender=plantasParaVender.add(planta)
+		plantasParaVender=[plantasParaVender.add(planta)]
 	}
 	method move(nuevaPosicion) {
 		self.position(nuevaPosicion)
@@ -103,7 +104,8 @@ object hector {
 	}
 	
 	method venderCosecha(){
-		oroAcumulado=oroAcumulado+plantasParaVender.map{planta=>planta.valorDeLaPlanta()}.sum()
+		oroAcumulado=oroAcumulado+(plantasParaVender.map{planta=>planta.valorDeLaPlanta()}.sum())
 		plantasParaVender= []
 	}
 }
+//asdasd
