@@ -1,6 +1,6 @@
 import wollok.game.*
 
-object maiz{
+class Maiz{
 	var property image="corn_baby.png"
 	
 	method estasSiendoRegada(){
@@ -22,7 +22,7 @@ object maiz{
 		return 150
 	}
 }
-object trigo{
+class Trigo{
 	var evoluciones=["wheat_0.png","wheat_1.png","wheat_2.png","wheat_3.png"]
 	var property image="wheat_0.png"
 	var numeroDeEvolucion=0
@@ -42,11 +42,11 @@ object trigo{
 			
 		}
 	}
-	method valoDeLaPlanta(){
+	method valorDeLaPlanta(){
 		return (numeroDeEvolucion-1)*100
 	}
 }
-object tomaco{
+class Tomaco{
 	var property image="tomaco.png"
 	method estasSiendoRegada(){
 	      game.removeVisual(self)
@@ -71,6 +71,7 @@ object hector {
 	method image(){
 		return "player.png"
 	}
+	
 	method guardarPlantaParaVender(planta){
 		plantasParaVender=plantasParaVender.add(planta)
 	}
@@ -78,13 +79,13 @@ object hector {
 		self.position(nuevaPosicion)
 	}
 	method sembrarMaiz(){
-		game.addVisualIn(maiz,self.position())
+		game.addVisualIn(new Maiz(),self.position())
 	}
 	method sembrarTrigo(){
-	    game.addVisualIn(trigo,self.position())
+	    game.addVisualIn(new Trigo(),self.position())
 	}
 	method sembrarTomaco(){
-		game.addVisualIn(tomaco,self.position())
+		game.addVisualIn(new Tomaco(),self.position())
 	}
 	method regar(objetosQueColisionan){
 		if(objetosQueColisionan==[]){
@@ -96,10 +97,13 @@ object hector {
 		if(plantasDondeEstoyParado==[]){
 			return throw new Exception ("no hay plantas para cosechar")
 		}
-		else{return plantasDondeEstoyParado.forEach({planta=>planta.estasSiendoCosechada()})}
+		else{return plantasDondeEstoyParado.first().estasSiendoCosechada()
+			/*plantasDondeEstoyParado.forEach({planta=>planta.estasSiendoCosechada()})*/
+		}
 	}
 	
 	method venderCosecha(){
 		oroAcumulado=oroAcumulado+plantasParaVender.map{planta=>planta.valorDeLaPlanta()}.sum()
+		plantasParaVender= []
 	}
 }

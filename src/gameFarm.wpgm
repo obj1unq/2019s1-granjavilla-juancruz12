@@ -6,6 +6,7 @@ program farmVille {
 	game.width(10)
 	game.ground("ground.png")
 	game.addVisual(hector)
+	///////////////////TECLADO/////////////////
 	keyboard.up().onPressDo { hector.move(hector.position().up(1)) }
 	keyboard.down().onPressDo { hector.move(hector.position().down(1)) }
 	keyboard.left().onPressDo { hector.move(hector.position().left(1)) }
@@ -17,6 +18,6 @@ program farmVille {
 	keyboard.c().onPressDo{hector.cosechar(game.colliders(hector))}
 	keyboard.v().onPressDo{hector.venderCosecha()}
 	
+	
 	game.start()
-    
 }
